@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
+        <div class="container">
+            <a class="navbar-brand">방구석 헬창</a>
+        </div>
+    </nav>
+</header>
+<!-- Page Content -->
+<section class="jumbotron text-center" style="bg-color:#ffffff !important">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="starter-template">
+                    <h1> AI 홈트레이닝 프로젝트 </h1>
+                    <br>
+                    <p class="lead">
+                        <img src="{{url_for('static',filename='images/main.jpg')}}" , width=50%, height=50%>
+                    <p style="font-size:20px;">영상을 입력할 방법을 선택해주세요!
+                    <ul class="list-unstyled">
+                        <button type="button" class="btn btn-primary" onclick="location.href='/upload'">Upload
+                            Video File
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='/webcam'">Connect
+                            by Webcam
+                        </button>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

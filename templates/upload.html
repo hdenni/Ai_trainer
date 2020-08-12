@@ -1,0 +1,76 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
+/*
+ * Styles for demo only
+ */
+.btn.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  outline: none;
+  color: #fff;
+}
+
+</style>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
+        <div class="container">
+            <a class="navbar-brand">방구석 헬창</a>
+        </div>
+    </nav>
+</header>
+<section class="jumbotron text-left">
+    <div class="container">
+    <div class="starter-template">
+        <form action="/fileUpload" method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <legend> 운동을 선택해주세요</legend>
+                <input type="radio" name="exercise_type" value="squat" checked> 스쿼트 </input>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend> 성별을 선택해주세요</legend>
+                <input type="radio" name="radio_sex" value="M" checked> 남성 </input>
+                <input type="radio" name="radio_sex" value="F"> 여성</input>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend> 데스크탑에 저장된 운동 영상을 올려주세요</legend>
+                <a>뭐쓰지..</a>
+                <div class="input-group mb-3" id="upload">
+                    <div class="custom-file">
+                        <input type="file" name="file" class="custom-file-input" id="InputFile"/>
+                        <label class="custom-file-label" for="inputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <input id="submit" class="btn btn-primary" type="submit" value="submit"/>
+                    </div>
+                </div>
+                <!--div id="upload">
+                    <input id="file" type="file" autofocus name="file"/>
+                    <input id="submit" class="btn btn-primary" type="submit" value="submit"/>
+                </div-->
+            </fieldset>
+        </form>
+    </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+$(document).on('change', '.custom-file-input', function (event) {
+    $(this).next('.custom-file-label').html(event.target.files[0].name);
+})
+</script>
+</body>
+</html>
