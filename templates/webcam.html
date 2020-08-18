@@ -1,9 +1,59 @@
 <html>
 <head>
-	<title> Web cam Streaming </title>
+<meta charset="utf-8">
+<meta content="stuff, to, help, search, engines, not" name="keywords">
+<meta content="What this page is about." name="description">
+<meta content="Display Webcam Stream" name="title">
+<title>Display Webcam Stream</title>
+<style>
+body {
+margin: 0px 0px;
+padding: 0px 0px;
+}
+
+#videoElement {
+width: 1280px;
+height: 720px;
+background-color: #000000;
+}
+</style>
 </head>
 <body>
-<!--input type="image" src="{{url_for('video_feed')}}"/-->
-<img src="{{url_for('video_feed')}}"/>
+<video autoplay="true" id="videoElement">
+</video>
+<!--img src="{{url_for('video_feed')}}"-->
+<script>
+// constraints 변수 안에 얻을 자원의 제약사항을 넣음
+var constraints = {audio: false, video: true};
+var video = document.querySelector("video");
+
+function successCallback(stream) {
+		video.srcObject = stream;
+		video.play();
+}
+
+function errorCallback(error) {
+		console.log("navigator.getUserMedia error: ", error);
+}
+console.log("video start");
+if (navigator.mediaDevices == undefined){ 
+	console.log("mediaDevices undefined");
+	navigator.mediaDevices = {}; }
+if (navigator.mediaDevices.getUserMedia == undefined) {
+	console.log("getUserMedia undefined");
+	navigator.mediaDevices.getUserMedia = function(constraints) {
+		var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+		if(!getUserMedia) { return Promise.reject(new Error('getUserMedia is not implemented in this browser')); }
+		return new Promise(function(resolve, reject) { getUserMedia.call(navigator, constraints, resolve, reject);});
+		}
+	}
+
+console.log("continue");
+// 제약사항 전달
+navigator.mediaDevices.getUserMedia(constraints)
+.then(successCallback)
+.catch(errorCallback);
+</script>
 </body>
 </html>
