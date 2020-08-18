@@ -41,7 +41,8 @@ def video_feed():
 def save_record():
 	if request.method == 'POST':
 		f = request.files['file']
-		f.save('upload/'+f.filename)
+		filename = str(request.files['title'])
+		f.save('upload/'+filename)
 		return 'success'
 
 @app.route('/upload')

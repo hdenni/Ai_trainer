@@ -67,6 +67,7 @@ $.ajax({
 	url: '/save_record',
 	data: form,
 	contentType: false,
+	processData: false
 	}).done(function(data){ console.log(data);});
   /*
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
