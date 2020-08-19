@@ -3,7 +3,7 @@
 
 import cv2
 import json
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, url_for, redirect
 
 # emurated camera
 # from webcamvideostream import WebcamVideoStream
@@ -17,7 +17,10 @@ def home():
 
 @app.route('/webcam')
 def webcam():
-	return render_template("webcam2.html") # webcam.html은 작동함 2는 실험중
+	# webcam.html: webcam streaming
+	# webcam2.html: webcam streaming + send video to server
+	# webcam3.html: by python opencv + flask
+	return render_template("webcam2.html") 
 
 @app.route('/upload')
 def render_file():
@@ -27,9 +30,12 @@ def render_file():
 def upload():
 	if request.method == 'POST':
 		f = request.files['file']
-		filename = 'user_video.mp4'
+		filename = 'user_video.webm'
 		f.save('upload/'+filename)
-	return 'success'
+	
+	# docker 실행
+	# result.html로 넘어가도록
+	return redirect(url_for('result'))
 
 @app.route('/comment')
 def comment():
@@ -38,22 +44,27 @@ def comment():
 	with open(result_json, 'r') as json_file:
 		data=json.load(json_file)
 
+	value = list(map(float, data.values()))
+
+	if value[0] < 0: data["1"] = "평균보다 무릎이 약 " + int(value[0]) + "도 덜 구부러졌습니다."
+	else: data["1"] = "평균보다 무릎이 약 " + str(value[0]) + "도 더 구부러졌습니다."
+
+	if value[1] < 0: data["2"] = "평균보다 허리가 약 " + str(value[1]) + "도 덜 굽혀졌습니다."
+	else: data["2"] = "평균보다 허리가 약 " + str(value[1]) + "도 더 굽혀졌습니다."
+
+	if value[2] < 0: data["3"] = "평균보다 약 " + str(value[2]) + " 빠르게 앉았습니다."
+	else: data["3"] = "평균보다 약 " + str(value[2]) + " 느리게 앉았습니다."
+
+	if value[3] < 0: data["4"] = "평균보다 약 " + str(value[3]) + " 빠르게 일어났습니다."
+	else: data["4"] = "평균보다 약 " + str(value[3]) + " 느리게 일어났습니다."
+
+	data["5"] = "운동의 전체적인 유사도는 " + str(value[4]) + "% 입니다."
+
 	return render_template("comment.html", data=data)
 
 @app.route('/result')
-def result():
-	# To-Do: 스켈레톤 이미지 띄워보기
-	# 아 스켈레톤 그대로 할지 openpose 쓸지 결정해야함!! -> 그려줄게
-	result_json = "resource/result_002.json"
-	sex_json = "upload/28-1_001-C09_mpi.json"
-	
-	with open(result_json, 'r') as json_file:
-		data=json.load(json_file)
-
-	with open(sex_json, "r") as json_file:
-		sex=json.load(json_file)
-
-	return render_template('result2.html', data=data, sex=sex)
+def result():	
+	return render_template('result.html')
 
 if __name__=='__main__':
 	app.run(host="0.0.0.0", port=8000, debug=True, threaded=True)

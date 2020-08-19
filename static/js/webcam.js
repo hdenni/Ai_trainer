@@ -32,7 +32,7 @@ recordButton.addEventListener('click', () => {
 
 const playButton = document.querySelector('button#play');
 playButton.addEventListener('click', () => {
-  const superBuffer = new Blob(recordedBlobs, {type: 'video/mp4'});
+  const superBuffer = new Blob(recordedBlobs, {type: 'video/webm'});
   recordedVideo.src = null;
   recordedVideo.srcObject = null;
   recordedVideo.src = window.URL.createObjectURL(superBuffer);
@@ -42,10 +42,10 @@ playButton.addEventListener('click', () => {
 
 const downloadButton = document.querySelector('button#download');
 downloadButton.addEventListener('click', () => {
-  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+  const blob = new Blob(recordedBlobs, {type: 'video/webm'});
   //const url = window.URL.createObjectURL(blob);
   var form = new FormData();
-  const file = new File([blob], 'user_video.mp4', {type:'video/mp4'}); 
+  const file = new File([blob], 'user_video.webm', {type:'video/webm'}); 
 
   form.append('file', file);
 
@@ -59,6 +59,10 @@ $.ajax({
 	cache: false,
 	success: function(){ console.log(file) }
 	});
+
+window.location.href='/result';
+
+// To-Do
 /*
   const a = document.createElement('a');
   a.href = "result.html";

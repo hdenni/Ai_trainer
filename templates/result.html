@@ -4,81 +4,89 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+
+    <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-	<!-- font -->
-	<link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+
+    <!-- font -->
+    <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <title>Result</title>
+
+    <!-- style -->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/style3.css')}}">
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/bootstrap.css')}}">
+
 </head>
+
+
 
 <body>
 <header>
-	<nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
-		<div class="container"> <a class="navbar-brand"> 방구석 헬창 </a> </div>
-	</nav>
+    <nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
+        <div class="container">
+            <a class="navbar-brand">방구석 헬창</a>
+
+        </div>
+    </nav>
 </header>
-<!-- Page Content -->
-<section class="jumbotron text-center" style="bg-color:#ffffff !important">
-	<div class="container">
-		<div class=row">
-			<div class="col-lg-12 text-center">
-				<div class="starter-template">
-					<!--정자세와 유저의 자세 image-->
-					<!--div style="width:80%; margin-right:200px; left margin-left:200px;" class="photo"-->
-					<div style="width:100%;" class="container">
-						<img src="{{url_for('static', filename='images/woman.jpg')}}" style="width:400px; margin-left:auto;" margin="auto"/>
-						<img src="{{url_for('static', filename='images/woman.jpg')}}" style="width:400px; margin-right:auto;" margin="auto"/>
-					</div>			
+<section class="jumbotron text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
 
-					<div class="img">
-						<img src="{{url_for('static', filename='images/animat-rocket-color.gif')}}" width="100px" height="100px">
-					</div>
-			
-					<!-- 유저 평가와 개선사항 -->
-					<div id="wrapper">
-						<div id="slider-wrap">
-							<ul id="slider">
-							<li>
-								<span style="color:black"><h5>평균보다 무릎이 약  {{data["1"]}}도 더 구부러졌습니다.</h5></span>
-								<img src="{{url_for('static', filename='images/woman.jpg')}}">
-							</li>
-							<li>
-								<span style="color:black"><h5>평균보다 허리가 약 {{data["2"]}}도 더 굽혀졌습니다.</h5></span>
-								<img src="{{url_for('static', filename='images/woman.jpg')}}">
-							</li>
-							<li>
-								<span style="color:black"><h5>평균보다 약 {{data["3"]}}% 빨리 앉았습니다.</h5></span>
-								<img src="{{url_for('static', filename='images/woman.jpg')}}">
-							</li>
-							<li>
-								<span style="color:black"><h5>평균보다 약 {{data["4"]}}% 느리게 일어났습니다.</h5></span>
-								<img src="{{url_for('static', filename='images/woman.jpg')}}" >
-							</li>
+                <!-- Title -->
+                <div class="text-left">
+                    <img src="{{url_for('static', filename='images/animat-rocket-color.gif')}}" width="100px" height="100px" class="rocket"/>
+                    <font size="40">Result</font>
+                </div>
 
-							<li>
-								<span style="color:black"><h5>운동의 전체적인 유사도는 {{data["5"]}}%입니다.</h5></span>
-								<img src="{{url_for('static', filename='images/woman.jpg')}}">
-							</li>
-							</ul>
+                <!-- 결과 영상 skeleton -->
+                <div class="container">
+                    <div id="video">
+                        <video controls autoplay loop muted >
+                            <source src="{{url_for('static', filename='result/video/ori.mp4')}}" type="video/mp4" >
+                        </video>
+                    </div>
 
-							<div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
-							<div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
-							<div id="counter"></div>
-              
-							<div id="pagination-wrap"> <ul></ul> </div>
-						</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <div id="buttons">
+                        <a href="{{url_for('static', filename='result/videos/result_fps6.mp4')}}" onclick="player_setRate(0);" class="btn btn-primary">fps6</a>
+                        <a href="{{url_for('static', filename='result/videos/result_fps15.mp4')}}" onclick="player_setRate(0);" class="btn btn-primary">fps15</a>
+                        <a href="{{url_for('static', filename='result/videos/result_fp30.mp4')}}" onclick="player_setRate(0);" class="btn btn-primary">fps30</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+<!---페이지-->
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="page-link" href="/result2" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="/result2">1</a></li>
+        <li class="page-item"><a class="page-link" href="/comment">2</a></li>
+        <li class="page-item">
+            <a class="page-link" href="/comment">Next</a>
+        </li>
+    </ul>
+</nav>
 </body>
+
 <script type="text/javascript" src="{{ url_for('static', filename='js/script3.js') }}"></script>
+<script language="javascript">
+function player_setRate(no)
+{
+    document.Player.rate = no;
+    document.Player.play();
+}
+</script>
 </html>
