@@ -25,7 +25,6 @@
 
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-	<!--script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script-->
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 
 	<!-- Bootstrap -->
@@ -33,10 +32,8 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	
 	<!-- etc -->
-	<!--link rel="icon" sizes="192x192" href="../../../images/webrtc-icon-192x192.png"-->
-    <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
-    <!--link rel="stylesheet" href="{{ url_for('static', filename='css/webcam.css') }}"-->
-
+	<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+    
 <style>
 .custom { width: 100px !important }
 </style>
@@ -51,20 +48,35 @@
 		</div>
 	</nav>
 </header>
-<section class="jumbotron text-center">
-	<div id="container">
-		<div id="webcam">
-			<video style="border: 3px solid black;" width=640 height=360 id="gum" playsinline autoplay muted></video>
-			<video style="border: 3px solid black;" width=640 height=360 id="recorded" playsinline loop></video>
+<section class="jumbotron">
+	<div class="container">
+		<!--form action="/jsondata" method="POST" enctype="multipart/form-data"-->
+		<div class="text-left">
+			<fieldset>
+				<legend> 운동을 선택해주세요 </legend>
+				<input type="radio" name="exercise_type" value="squat" checked> 스쿼트 </input>
+			</fieldset>
+			<br>
+			<fieldset>
+				<legend> 성별을 선택해주세요 </legend>
+				<input type="radio" name="radio_sex" value="M" checked> 남성 </input>
+				<input type="radio" name="radio_sex" value="F"> 여성 </input>
+			</fieldset>
 		</div>
+		<br><br>
+		<div class="text-center">
+			<div id="webcam">
+				<video style="border: 3px solid black;" width=480 height=270 id="gum" playsinline autoplay muted></video>
+				<video style="border: 3px solid black;" width=480 height=270 id="recorded" playsinline loop></video>
+			</div>
 
-		<div>
-			<button class="btn btn-primary custom" id="start">Start Webcam</button>
-			<button class="btn btn-primary custom" id="record" disabled>Start Recording</button>
-			<button class="btn btn-primary custom" id="play" disabled>Play Video</button>
-			<button class="btn btn-primary custom" id="download" disabled>Download Video</button>
+			<div>
+				<button class="btn btn-primary custom" id="start">Start Webcam</button>
+				<button class="btn btn-primary custom" id="record" disabled>Start Recording</button>
+				<button class="btn btn-primary custom" id="play" disabled>Play Video</button>
+				<button class="btn btn-primary custom" id="download" disabled>Submit Video</button>
+			</div>
 		</div>
-
 		<div>
 			<span id="errorMsg"></span>
 		</div>

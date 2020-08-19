@@ -20,6 +20,7 @@ def home():
 def webcam():
 	return render_template("webcam2.html") # webcam.html은 작동함 2는 실험중
 
+'''
 def generate(camera):
 	while True:
 		frame = camera.get_frame()
@@ -36,14 +37,13 @@ def video_feed():
 #		socketio.emit('from_flask', {'data':video_frame}, namespace='/test')
 	return Response(generate(WebcamVideoStream()),
 					mimetype="multipart/x-mixed-replace; boundary=frame")
-
+'''
 @app.route('/save_record', methods=["POST", "GET"])
 def save_record():
 	if request.method == 'POST':
 		f = request.files['file']
-		filename = str(request.files['title'])
-		f.save('upload/'+filename)
-		return 'success'
+		f.save('upload/user_video.mp4')
+	return 'success'
 
 @app.route('/upload')
 def render_file():
@@ -52,19 +52,22 @@ def render_file():
 @app.route("/fileUpload", methods=['GET', 'POST'])
 def upload_file():
 	if request.method == 'POST':
+		
 		f = request.files['file']
-		f.save('upload/'+f.filename)
+		filename = 'user_video.mp4'
+		f.save('upload/'+filename)
 
 		s = request.form['radio_sex']
 		json_data = {"sex":s}
 
-		with open("upload/"+f.filename[:-4]+".json", "w") as json_file:
+		with open("upload/"+'data'+".json", "w") as json_file:
 			json.dump(json_data, json_file)
-	
+
 	# docker openpose와 관련된 shell파일 실행
 	# result와 관련된 변수 정의
 	# return render_tempate("result.html", ...)
 	return "Success"
+
 
 @app.route('/comment')
 def comment():

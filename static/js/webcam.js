@@ -42,33 +42,20 @@ playButton.addEventListener('click', () => {
 
 const downloadButton = document.querySelector('button#download');
 downloadButton.addEventListener('click', () => {
-/*  var data = {};
-  data["video"] = new Blob(recordedBlobs, {type: 'video/mp4'});
-  console.log("hello");
-
-$.ajax({
-	url: "/output",
-	type: "POST",
-	contentType: "application/json",
-	data: data,
-});
-*/
-  var form = new FormData();
-  var filename = "webcam.mp4";
-
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+  //const url = window.URL.createObjectURL(blob);
   
-  form.append('file', blob);
-  form.append('title', filename);
+  let file = new File([blob], 'recording'); 
 
 $.ajax({
 	type: 'POST',
 	enctype: 'multipart/form-data',
 	url: '/save_record',
-	data: form,
+	data: file,
 	contentType: false,
-	processData: false
-	}).done(function(data){ console.log(data);});
+	processData: false,
+	success: function(){ console.log(file) }
+	});
   /*
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
   const url = window.URL.createObjectURL(blob);
