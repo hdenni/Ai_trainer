@@ -4,70 +4,32 @@
 import cv2
 import json
 from flask import Flask, render_template, Response, request
-from flask_socketio import SocketIO, emit
 
 # emurated camera
-from webcamvideostream import WebcamVideoStream
+# from webcamvideostream import WebcamVideoStream
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+
 
 @app.route('/')
 def home():
 	return render_template("home.html")
 
-@app.route('/webcam', methods=['POST', 'GET'])
+@app.route('/webcam')
 def webcam():
 	return render_template("webcam2.html") # webcam.html은 작동함 2는 실험중
-
-'''
-def generate(camera):
-	while True:
-		frame = camera.get_frame()
-		if frame:
-			yield(b'--frame\r\n'
-				  b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-		else:
-			print("No Frame")
-			pass
-
-@app.route('/video_feed', methods=['GET', 'POST'])
-def video_feed():
-#	for video_frame in generate(WebcamVideoStream()):
-#		socketio.emit('from_flask', {'data':video_frame}, namespace='/test')
-	return Response(generate(WebcamVideoStream()),
-					mimetype="multipart/x-mixed-replace; boundary=frame")
-'''
-@app.route('/save_record', methods=["POST", "GET"])
-def save_record():
-	if request.method == 'POST':
-		f = request.files['file']
-		f.save('upload/user_video.mp4')
-	return 'success'
 
 @app.route('/upload')
 def render_file():
 	return render_template('upload.html')
 
-@app.route("/fileUpload", methods=['GET', 'POST'])
-def upload_file():
+@app.route('/uploadFile', methods=["POST"])
+def upload():
 	if request.method == 'POST':
-		
 		f = request.files['file']
 		filename = 'user_video.mp4'
 		f.save('upload/'+filename)
-
-		s = request.form['radio_sex']
-		json_data = {"sex":s}
-
-		with open("upload/"+'data'+".json", "w") as json_file:
-			json.dump(json_data, json_file)
-
-	# docker openpose와 관련된 shell파일 실행
-	# result와 관련된 변수 정의
-	# return render_tempate("result.html", ...)
-	return "Success"
-
+	return 'success'
 
 @app.route('/comment')
 def comment():

@@ -44,18 +44,25 @@ const downloadButton = document.querySelector('button#download');
 downloadButton.addEventListener('click', () => {
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
   //const url = window.URL.createObjectURL(blob);
-  
-  let file = new File([blob], 'recording'); 
+  var form = new FormData();
+  const file = new File([blob], 'user_video.mp4', {type:'video/mp4'}); 
+
+  form.append('file', file);
 
 $.ajax({
 	type: 'POST',
 	enctype: 'multipart/form-data',
-	url: '/save_record',
-	data: file,
+	url: '/uploadFile',
+	data: form,
 	contentType: false,
 	processData: false,
+	cache: false,
 	success: function(){ console.log(file) }
 	});
+/*
+  const a = document.createElement('a');
+  a.href = "result.html";
+*/
   /*
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
   const url = window.URL.createObjectURL(blob);
