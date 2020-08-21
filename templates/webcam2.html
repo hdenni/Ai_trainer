@@ -22,7 +22,10 @@
 	<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
     
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body {font-family: 'Nanum Gothic';}
 .custom { width: 100px !important }
+</style>
 </style>
 
 </head>
@@ -31,12 +34,15 @@
 <header>
 	<nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
 		<div class="container">
-			<a class="navbar-brand">방구석 헬창</a>
+			<a class="navbar-brand" href="/">방구석 헬창</a>
 		</div>
 	</nav>
 </header>
-<section class="jumbotron">
+<section>
+	<br><br>
 	<div class="container">
+		<h2> 연결된 웹캠으로 운동 영상을 촬영합니다.</h2>
+		<br>
 		<div class="text-left">
 			<fieldset>
 				<legend> 운동을 선택해주세요 </legend>
@@ -55,12 +61,13 @@
 				<video style="border: 3px solid black;" width=480 height=270 id="gum" playsinline autoplay muted></video>
 				<video style="border: 3px solid black;" width=480 height=270 id="recorded" playsinline loop></video>
 			</div>
+			<br>
 
 			<div>
-				<button class="btn btn-primary custom" id="start">Start Webcam</button>
-				<button class="btn btn-primary custom" id="record" disabled>Start Recording</button>
-				<button class="btn btn-primary custom" id="play" disabled>Play Video</button>
-				<button class="btn btn-primary custom" id="download" disabled>Submit Video</button>
+				<button class="btn btn-dark custom" id="start">Start Webcam</button>
+				<button class="btn btn-dark custom" id="record" disabled>Start Recording</button>
+				<button class="btn btn-dark custom" id="play" disabled>Play Video</button>
+				<button class="btn btn-dark custom" id="download" disabled>Submit Video</button>
 			</div>
 		</div>
 		<div>

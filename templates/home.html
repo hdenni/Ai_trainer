@@ -10,34 +10,45 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 </head>
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body {font-family: 'Nanum Gothic';}
+</style>
 <body>
 <header>
     <nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
         <div class="container">
-            <a class="navbar-brand">방구석 헬창</a>
+            <a class="navbar-brand" href="/">방구석 헬창</a>
         </div>
     </nav>
 </header>
 <!-- Page Content -->
-<section class="jumbotron text-center">
+<section class="text-center">
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="starter-template">
-                    <h1> AI 홈트레이닝 프로젝트 </h1>
+                    <h1 style="font-weight: bold;"> AI 홈트레이닝 프로젝트 </h1>
                     <br>
+
                     <p class="lead">
-                        <img src="{{url_for('static',filename='images/main.jpg')}}" , width=50%, height=50%>
-                    <p style="font-size:20px;">영상을 입력할 방법을 선택해주세요!
+                        <img src="{{url_for('static',filename='images/main.jpg')}}" width=50%, height=50%>
+                    <p style="font-size:20px;">영상을 입력할 방법을 선택해주세요! </p>
                     <ul class="list-unstyled">
-                        <button type="button" class="btn btn-primary" onclick="location.href='/upload'">Upload
-                            Video File
+                        <button type="button" class="btn btn-dark" onclick="location.href='/upload'">
+							Upload Video File 
+						</button>
+                        <button type="button" class="btn btn-dark" onclick="location.href='/webcam'">
+							Connect by Webcam
                         </button>
-                        <button type="button" class="btn btn-primary" onclick="location.href='/webcam'">Connect
-                            by Webcam
-                        </button>
+						<!--
+						<button type="button" class="btn btn-dark" onclick="location.href='/test'">
+							test
+						</button>
+						-->
                     </ul>
-                    </p>
+                    <ul> <button type="button" class="btn btn-dark" onclick="location.href='/result'">result</button></ul>
                 </div>
             </div>
         </div>

@@ -6,6 +6,9 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <style>
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body {font-family: 'Nanum Gothic';}
+
 .file {
   visibility: hidden;
   position: absolute;
@@ -26,12 +29,15 @@
 <header>
     <nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
         <div class="container">
-            <a class="navbar-brand">방구석 헬창</a>
+            <a class="navbar-brand" href="/">방구석 헬창</a>
         </div>
     </nav>
 </header>
-<section class="jumbotron text-left">
+<section class="text-left">
+    <br><br>
     <div class="container">
+        <h2>컴퓨터에 저장된 운동 영상으로 자세를 판별합니다.</h2>
+        <br>
     <div class="starter-template">
         <form action="/uploadFile" method="POST" enctype="multipart/form-data">
             <fieldset>
@@ -53,7 +59,7 @@
                         <label class="custom-file-label" for="inputFile">Choose file</label>
                     </div>
                     <div class="input-group-append">
-                        <input id="submit" class="btn btn-primary" type="submit" value="submit"/>
+                        <input id="submit" class="btn btn-dark" type="submit" value="submit"/>
                     </div>
                 </div>
                 <!--div id="upload">

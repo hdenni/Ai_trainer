@@ -1,9 +1,7 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -12,81 +10,157 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body {
+font-family: 'Nanum Gothic';
+}
 
-    <!-- font -->
-    <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 720px;
+}
 
-    <title>Result</title>
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
 
-    <!-- style -->
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/style3.css')}}">
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/bootstrap.css')}}">
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
 
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  background-color: #ffffff;
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  width: 720px;
+}
+</style>
 </head>
-
-
-
 <body>
 <header>
     <nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
         <div class="container">
-            <a class="navbar-brand">방구석 헬창</a>
+            <a class="navbar-brand" href="/">방구석 헬창</a>
 
         </div>
     </nav>
 </header>
-<section class="jumbotron text-center">
+<section id="body">
+    <br><br>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
+        <!-- Title -->
+        <div class="text-left">
+            <h2>Result</h2>
+        </div>
+        <br>
 
-                <!-- Title -->
-                <div class="text-left">
-                    <img src="{{url_for('static', filename='images/animat-rocket-color.gif')}}" width="100px" height="100px" class="rocket"/>
-                    <font size="40">Result</font>
+        <!-- 결과 영상 skeleton -->
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <video width=480 height=270 controls autoplay loop muted >
+                        <source src="{{url_for('static', filename='result/videos/user.mp4')}}" type="video/mp4" >
+                    </video>
+                    <video width=480 height=270 controls autoplay loop muted >
+                        <source src="{{url_for('static', filename='result/videos/result.avi')}}" type="video/avi" >
+                    </video>
                 </div>
-
-                <!-- 결과 영상 skeleton -->
-                <div class="container">
-                    <div id="video">
-                        <video controls autoplay loop muted >
-                            <source src="{{url_for('static', filename='result/video/ori.mp4')}}" type="video/mp4" >
-                        </video>
+                <div class="col-6 container">
+                    <div class="tab row">
+                        <button class="col tablinks" onclick="openCity(event, 'data1')" id="defaultOpen">무릎 각도</button>
+                        <button class="col tablinks" onclick="openCity(event, 'data2')">허리 각도</button>
+                        <button class="col tablinks" onclick="openCity(event, 'data3')">앉는 속도</button>
+                        <button class="col tablinks" onclick="openCity(event, 'data4')">서는 속도</button>
+                        <button class="col tablinks" onclick="openCity(event, 'data5')">운동 양상 비교</button>
                     </div>
 
-                    <div id="buttons">
-                        <a href="{{url_for('static', filename='result/videos/result_fps6.mp4')}}" onclick="player_setRate(0);" class="btn btn-primary">fps6</a>
-                        <a href="{{url_for('static', filename='result/videos/result_fps15.mp4')}}" onclick="player_setRate(0);" class="btn btn-primary">fps15</a>
-                        <a href="{{url_for('static', filename='result/videos/result_fp30.mp4')}}" onclick="player_setRate(0);" class="btn btn-primary">fps30</a>
+                    <div class="text-left row">
+                        <div id="data1" class="tabcontent">
+                            <!-- 무릎각도 확인 -->
+                            <img width=700 height=375 src="{{url_for('static', filename='result/images/data1.png')}}">
+                            <br><br>
+                            <div class="alert alert-dark" role="alert">
+                                <p>{{data["1"]}}</p>
+                            </div>
+                        </div>
+
+                        <div id="data2" class="tabcontent">
+                            <!-- 허리각도 확인 -->
+                            <img width=700 height=375 src="{{url_for('static', filename='result/images/data2.png')}}">
+                            <br><br>
+                            <div class="alert alert-dark" role="alert"><p>{{data["2"]}}</p></div>
+                        </div>
+
+                        <div id="data3" class="tabcontent">
+                            <!-- 유저 비디오 -->
+                            <video width=700 height=375 src="{{url_for('static', filename='result/videos/result.avi')}}">
+                            <br><br>
+                            <div class="alert alert-dark" role="alert"><p>{{data["3"]}}</p></div>
+                        </div>
+
+                        <div id="data4" class="tabcontent">
+                            <!-- 유저 비디오 -->
+                            <video width=700 height=375 src="{{url_for('static', filename='result/videos/result.avi')}}">
+                            <br><br>
+                            <div class="alert alert-dark" role="alert"> <p>{{data["4"]}}</p></div>
+                        </div>
+
+                        <div id="data5" class="tabcontent">
+                            <!-- 비교 그래프 -->
+                            <img width=700 height=375 src="{{url_for('static', filename='result/images/graph.png')}}">
+                            <br><br>
+                            <div class="alert alert-dark" role="alert"><p>{{data["5"]}}</p></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!---페이지-->
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-            <a class="page-link" href="/result2" tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="/result2">1</a></li>
-        <li class="page-item"><a class="page-link" href="/comment">2</a></li>
-        <li class="page-item">
-            <a class="page-link" href="/comment">Next</a>
-        </li>
-    </ul>
-</nav>
-</body>
 
-<script type="text/javascript" src="{{ url_for('static', filename='js/script3.js') }}"></script>
-<script language="javascript">
-function player_setRate(no)
-{
-    document.Player.rate = no;
-    document.Player.play();
+
+    </div>
+
+
+</section>
+
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
 }
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
 </script>
+
+</body>
 </html>
