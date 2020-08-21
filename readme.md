@@ -1,9 +1,8 @@
 Result 파일 경로
-1. ringfit_web/upload/user.mp4
-> 업로드 된 유저 영상 위치, 이름(이름 변경할 수 있음)
+1. ringfit_web/upload/user.mp4  
+업로드 된 유저 영상 위치, 이름(이름 변경할 수 있음)
 
-2. 결과는 ringfit_web/static/result
-에
+2. 결과는 ringfit_web/static/result  
 <이미지, 비디오>
 1) result/images/data1.png
 무릎 각도와 관련된 이미지
