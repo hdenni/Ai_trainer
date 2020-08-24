@@ -27,22 +27,16 @@ def webcam():
 	return render_template("webcam2.html") 
 
 def generate(camera):
-	out = cv2.VideoWriter('save.avi', cv2.VideoWriter_fourcc(*'DIVX'), 25.0, (1280, 720))
+	#out = cv2.VideoWriter('save.avi', cv2.VideoWriter_fourcc(*'DIVX'), 25.0, (1280, 720))
 	while True:
 		frame = camera.get_frame()
 
 		if frame:
-			global_frame = frame
-			out.write(frame)
 			yield (b'--frame\r\n'
 				   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 		else:
-			if global_frame:
-				yield (b'--frame\r\n'
-					   b'Content-Type: image/jpeg\r\n\r\n' + global_frame + b'\r\n\r\n')
-			else:
-				print("No Frame")
-				pass
+			print("No Frame")
+			pass
 
 @app.route('/video_feed', methods=['GET', 'POST'])
 def video_feed():
