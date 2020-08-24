@@ -79,12 +79,16 @@ font-family: 'Nanum Gothic';
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <video width=480 height=270 controls autoplay loop muted >
-                        <source src="{{url_for('static', filename='result/videos/result3.webm')}}" type="video/webm">
+					<video width=480 height=270 controls autoplay loop muted>
+                        <source id="user" src="{{url_for('static', filename='result/videos/user_000.mp4')}}" type="video/mp4">
                     </video>
-                    <video width=480 height=270 controls autoplay loop muted >
-                        <source src="{{url_for('static', filename='result/videos/user_000.mp4')}}" type="video/mp4">
+                    <video width=480 height=270 controls autoplay loop muted id="video_result">
+                        <source id="result" src="{{url_for('static', filename='result/videos/result3.webm')}}" type="video/webm">
                     </video>
+					<button type="button" class="btn btn-dark" id="origin" onclick="click_fps('1')"> original </button>
+					<button type="button" class="btn btn-dark" id="fps6" onclick="click_fps('2')"> fps6 </button>
+					<button type="button" class="btn btn-dark" id="fps15" onclick="click_fps('3')"> fps15 </button>
+					<button type="button" class="btn btn-dark" id="fps30" onclick="click_fps('4')"> fps30 </button>
                 </div>
                 <div class="col-6 container">
                     <div class="tab row">
@@ -114,7 +118,7 @@ font-family: 'Nanum Gothic';
 
                         <div id="data3" class="tabcontent">
                             <!-- 유저 비디오 -->
-                            <video src="{{url_for('static', filename='result/videos/result.mp4')}}" type="video/mp4" controls autoplay loop muted>
+                            <video width=700 height=375 src="{{url_for('static', filename='result/videos/result.mp4')}}" type="video/mp4" controls autoplay loop muted>
                             <br><br>
                             <div class="alert alert-dark" role="alert"><p>{{data["3"]}}</p></div>
                         </div>
@@ -160,7 +164,22 @@ function openCity(evt, cityName) {
 }
 // Get the element with id="defaultOpen" and click on it
 document.getElementById("defaultOpen").click();
-</script>
 
+function click_fps(t){
+  var src = document.getElementById('result');
+  if (t=='1') {
+	src.setAttribute('src', "{{url_for('static', filename='result/videos/result3.webm')}}");
+  } else if(t=='2') {
+	src.setAttribute('src', "{{url_for('static', filename='result/videos/result_000_fps6.webm')}}");
+  } else if(t=='3') {
+	src.setAttribute('src', "{{url_for('static', filename='result/videos/result_000_fps15.webm')}}");
+  } else if(t=='4') {
+	src.setAttribute('src', "{{url_for('static', filename='result/videos/result_000_fps30.webm')}}");
+  }
+  var video = document.getElementById('video_result').load();
+};
+
+
+</script>
 </body>
 </html>
