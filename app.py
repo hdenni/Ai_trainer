@@ -4,6 +4,7 @@
 import cv2
 import json
 from flask import Flask, render_template, Response, request, url_for, redirect
+import os
 
 # emurated camera
 from webcamvideostream import WebcamVideoStream
@@ -43,14 +44,13 @@ def generate(camera):
 				print("No Frame")
 				pass
 
-
-
 @app.route('/video_feed', methods=['GET', 'POST'])
 def video_feed():
 #	for video_frame in generate(WebcamVideoStream()):
 #		socketio.emit('from_flask', {'data':video_frame}, namespace='/test')
 	return Response(generate(WebcamVideoStream()),
 					mimetype="multipart/x-mixed-replace; boundary=frame")
+
 # @app.route('/record_status', methods=['POST'])
 # def record_status():
 # 	json = request.get_json()
@@ -67,41 +67,15 @@ def upload():
 	if request.method == 'POST':
 		f = request.files['file']
 		#f.save('upload/'+f.filename)
-		f.save('upload/'+'user.mp4')
-		f.save('static/result/user.mp4')
+		#f.save('upload/'+'user_000.mp4')
+		f.save('static/result/videos/user_000.mp4')
 	
 	openpose()
 	return redirect(url_for('result'))
-'''
-@app.route('/comment')
-def comment():
-	result_json="resource/result_002.json"
-
-	with open(result_json, 'r') as json_file:
-		data=json.load(json_file)
-
-	value = list(map(float, data.values()))
-
-	if value[0] < 0: data["1"] = "평균보다 무릎이 약 " + int(value[0]) + "도 덜 구부러졌습니다."
-	else: data["1"] = "평균보다 무릎이 약 " + str(value[0]) + "도 더 구부러졌습니다."
-
-	if value[1] < 0: data["2"] = "평균보다 허리가 약 " + str(value[1]) + "도 덜 굽혀졌습니다."
-	else: data["2"] = "평균보다 허리가 약 " + str(value[1]) + "도 더 굽혀졌습니다."
-
-	if value[2] < 0: data["3"] = "평균보다 약 " + str(value[2]) + " 빠르게 앉았습니다."
-	else: data["3"] = "평균보다 약 " + str(value[2]) + " 느리게 앉았습니다."
-
-	if value[3] < 0: data["4"] = "평균보다 약 " + str(value[3]) + " 빠르게 일어났습니다."
-	else: data["4"] = "평균보다 약 " + str(value[3]) + " 느리게 일어났습니다."
-
-	data["5"] = "운동의 전체적인 유사도는 " + str(value[4]) + "% 입니다."
-
-	return render_template("comment.html", data=data)
-'''
 
 # openpose 관련 shell파일 실행
 def openpose():
-	os.system('./openpose.sh')
+	os.system('/home/centos/ringfit_web/ringfit_ML/main.sh')
 
 @app.route('/result')
 def result():
@@ -110,18 +84,22 @@ def result():
 	with open(result_json, 'r') as json_file:
 		data=json.load(json_file)
 
-	value = list(map(float, data.values()))
+	# value = list(map(float, data.values()[:5]))
 
-	if value[0] < 0: data["1"] = "평균보다 무릎이 약 " + int(value[0]) + "도 덜 구부러졌습니다."
+	value = list()
+	for i in ["1", "2", "3", "4", "5"]:
+		value.append(float(data[i]))
+
+	if value[0] < 0: data["1"] = "평균보다 무릎이 약 " + str(-1 * value[0]) + "도 덜 구부러졌습니다."
 	else: data["1"] = "평균보다 무릎이 약 " + str(value[0]) + "도 더 구부러졌습니다."
 
-	if value[1] < 0: data["2"] = "평균보다 허리가 약 " + str(value[1]) + "도 덜 굽혀졌습니다."
+	if value[1] < 0: data["2"] = "평균보다 허리가 약 " + str(-1 * value[1]) + "도 덜 굽혀졌습니다."
 	else: data["2"] = "평균보다 허리가 약 " + str(value[1]) + "도 더 굽혀졌습니다."
 
-	if value[2] < 0: data["3"] = "평균보다 약 " + str(value[2]) + " 빠르게 앉았습니다."
+	if value[2] < 0: data["3"] = "평균보다 약 " + str(-1 * value[2]) + " 빠르게 앉았습니다."
 	else: data["3"] = "평균보다 약 " + str(value[2]) + " 느리게 앉았습니다."
 
-	if value[3] < 0: data["4"] = "평균보다 약 " + str(value[3]) + " 빠르게 일어났습니다."
+	if value[3] < 0: data["4"] = "평균보다 약 " + str(-1 * value[3]) + " 빠르게 일어났습니다."
 	else: data["4"] = "평균보다 약 " + str(value[3]) + " 느리게 일어났습니다."
 
 	data["5"] = "운동의 전체적인 유사도는 " + str(value[4]) + "% 입니다."
@@ -129,4 +107,4 @@ def result():
 	return render_template('result.html', data=data)
 
 if __name__=='__main__':
-	app.run(debug=True, threaded=True)
+	app.run(host="0.0.0.0", port=8000, debug=True, threaded=True)

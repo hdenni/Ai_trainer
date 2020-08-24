@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -62,7 +63,6 @@ font-family: 'Nanum Gothic';
     <nav class="navbar navbar-dark bg-dark static-top" style="color:#ffffff !important">
         <div class="container">
             <a class="navbar-brand" href="/">방구석 헬창</a>
-
         </div>
     </nav>
 </header>
@@ -80,10 +80,10 @@ font-family: 'Nanum Gothic';
             <div class="row">
                 <div class="col-6">
                     <video width=480 height=270 controls autoplay loop muted >
-                        <source src="{{url_for('static', filename='result/videos/user.mp4')}}" type="video/mp4" >
+                        <source src="{{url_for('static', filename='result/videos/result3.webm')}}" type="video/webm">
                     </video>
                     <video width=480 height=270 controls autoplay loop muted >
-                        <source src="{{url_for('static', filename='result/videos/result.avi')}}" type="video/avi" >
+                        <source src="{{url_for('static', filename='result/videos/user_000.mp4')}}" type="video/mp4">
                     </video>
                 </div>
                 <div class="col-6 container">
@@ -98,7 +98,7 @@ font-family: 'Nanum Gothic';
                     <div class="text-left row">
                         <div id="data1" class="tabcontent">
                             <!-- 무릎각도 확인 -->
-                            <img width=700 height=375 src="{{url_for('static', filename='result/images/data1.png')}}">
+                            <img width=700 height=375 src="{{url_for('static', filename='result/images/data1.jpg')}}">
                             <br><br>
                             <div class="alert alert-dark" role="alert">
                                 <p>{{data["1"]}}</p>
@@ -107,28 +107,28 @@ font-family: 'Nanum Gothic';
 
                         <div id="data2" class="tabcontent">
                             <!-- 허리각도 확인 -->
-                            <img width=700 height=375 src="{{url_for('static', filename='result/images/data2.png')}}">
+                            <img width=700 height=375 src="{{url_for('static', filename='result/images/data2.jpg')}}">
                             <br><br>
                             <div class="alert alert-dark" role="alert"><p>{{data["2"]}}</p></div>
                         </div>
 
                         <div id="data3" class="tabcontent">
                             <!-- 유저 비디오 -->
-                            <video width=700 height=375 src="{{url_for('static', filename='result/videos/result.avi')}}">
+                            <video src="{{url_for('static', filename='result/videos/result.mp4')}}" type="video/mp4" controls autoplay loop muted>
                             <br><br>
                             <div class="alert alert-dark" role="alert"><p>{{data["3"]}}</p></div>
                         </div>
 
                         <div id="data4" class="tabcontent">
                             <!-- 유저 비디오 -->
-                            <video width=700 height=375 src="{{url_for('static', filename='result/videos/result.avi')}}">
+                            <video width=700 height=375 src="{{url_for('static', filename='result/videos/result.mp4')}}" type="video/mp4" controls autoplay loop muted>
                             <br><br>
                             <div class="alert alert-dark" role="alert"> <p>{{data["4"]}}</p></div>
                         </div>
 
                         <div id="data5" class="tabcontent">
                             <!-- 비교 그래프 -->
-                            <img width=700 height=375 src="{{url_for('static', filename='result/images/graph.png')}}">
+                            <img width=700 height=375 src="{{url_for('static', filename='result/images/graph.jpg')}}">
                             <br><br>
                             <div class="alert alert-dark" role="alert"><p>{{data["5"]}}</p></div>
                         </div>
